@@ -5,6 +5,8 @@ import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.system.MemoryStack;
+import org.nymo.engine.listeners.KeyListener;
+import org.nymo.engine.listeners.MouseListener;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -56,14 +58,17 @@ public class Window {
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
 
-        // Create callbacks //
-
-
         // Create the window
         glfwWindow = glfwCreateWindow(this.width, this.height, this.title, NULL, NULL);
         if (glfwWindow == NULL) {
             throw new IllegalStateException("Failed to create the GLFW window.");
         }
+
+        // Create callbacks //
+        glfwSetKeyCallback(glfwWindow, KeyListener::keyCallback);
+        glfwSetScrollCallback(glfwWindow, MouseListener::mouseScrollCallback);
+        glfwSetMouseButtonCallback(glfwWindow, MouseListener::mouseButtonCallback);
+        glfwSetCursorPosCallback(glfwWindow, MouseListener::mousePosCallback);
 
         // Get the thread stack and push a new frame
         try ( MemoryStack stack = stackPush() ) {
