@@ -2,7 +2,7 @@
     "java.project.sourcePaths": ["src"],
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [
-        "lib/**/*.jar"
+        "libs/**/*.jar"
     ],
     "java.project.exportJar.targetPath": "${workspaceFolder}/jar/${workspaceFolderBasename}.jar"
 }
