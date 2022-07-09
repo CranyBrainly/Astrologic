@@ -34,7 +34,7 @@ public class Window {
     private Window() {
         this.width = 800;
         this.height = 450;
-        this.title = "Mario";
+        this.title = "Astrologic";
 
         this.r = 1.0f;
         this.g = 1.0f;
@@ -53,10 +53,11 @@ public class Window {
         switch (newScene) {
             case 0:
                 currentScene = new LevelEditorScene();
-                // currentScene.init();
+                currentScene.init();
                 break;
             case 1:
                 currentScene = new LevelScene();
+                currentScene.init();
                 break;
             default:
                 assert false : "Unknown Scene '" + newScene + "'";
