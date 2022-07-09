@@ -29,8 +29,6 @@ public class Window {
 
     public float r, g, b;
 
-    private boolean fadeToBlack;
-
     private Window() {
         this.width = 800;
         this.height = 450;
