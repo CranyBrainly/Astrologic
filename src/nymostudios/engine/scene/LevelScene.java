@@ -1,6 +1,6 @@
-package org.nymo.engine.scene;
+package nymostudios.engine.scene;
 
-import org.nymo.engine.Window;
+import nymostudios.engine.Window;
 
 public class LevelScene extends Scene {
     public LevelScene() {

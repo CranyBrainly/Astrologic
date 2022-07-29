@@ -1,4 +1,4 @@
-package org.nymo.engine.scene;
+package nymostudios.engine.scene;
 
 public abstract class Scene {
     public Scene() {}

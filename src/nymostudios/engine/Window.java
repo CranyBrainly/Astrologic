@@ -1,4 +1,4 @@
-package org.nymo.engine;
+package nymostudios.engine;
 
 import java.nio.IntBuffer;
 import org.lwjgl.Version;
@@ -6,12 +6,13 @@ import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.system.MemoryStack;
-import org.nymo.engine.listeners.KeyListener;
-import org.nymo.engine.listeners.MouseListener;
-import org.nymo.engine.scene.LevelEditorScene;
-import org.nymo.engine.scene.LevelScene;
-import org.nymo.engine.scene.Scene;
-import org.nymo.util.Time;
+
+import nymostudios.engine.listeners.KeyListener;
+import nymostudios.engine.listeners.MouseListener;
+import nymostudios.engine.scene.LevelEditorScene;
+import nymostudios.engine.scene.LevelScene;
+import nymostudios.engine.scene.Scene;
+import nymostudios.util.Time;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;

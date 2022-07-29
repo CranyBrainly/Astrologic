@@ -1,4 +1,4 @@
-package org.nymo.engine.scene;
+package nymostudios.engine.scene;
 
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.*;
@@ -7,7 +7,8 @@ import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
 import org.lwjgl.BufferUtils;
-import org.nymo.engine.renderer.Shader;
+
+import nymostudios.engine.renderer.Shader;
 
 public class LevelEditorScene extends Scene {
 
