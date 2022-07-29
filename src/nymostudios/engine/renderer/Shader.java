@@ -22,7 +22,7 @@ public class Shader {
     public Shader(String filepath) {
         this.filePath = filepath;
         try {
-            String source = new String(Files.readAllBytes(Paths.get("src/org/nymo/" + filepath)));
+            String source = new String(Files.readAllBytes(Paths.get("src/nymostudios/" + filepath)));
             String[] splitString = source.split("(#type)( )+([a-zA-Z]+)");
 
             // Find the first pattern after #type  <pattern> //
@@ -122,5 +122,6 @@ public class Shader {
         int varLocation = glGetUniformLocation(shaderProgramID, varName);
         FloatBuffer matBuffer = BufferUtils.createFloatBuffer(16);
         mat4.get(matBuffer);
+        glUniformMatrix4fv(varLocation, false, matBuffer);
     }
 }
