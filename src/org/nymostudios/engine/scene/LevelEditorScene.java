@@ -48,7 +48,7 @@ public class LevelEditorScene extends Scene {
         vaoID = glGenVertexArrays();
         glBindVertexArray(vaoID);
 
-        // Create a float buffer of vertices ..
+        // Create a float buffer of vertices //
         FloatBuffer vertexBuffer = BufferUtils.createFloatBuffer(vertexArray.length);
         vertexBuffer.put(vertexArray).flip();
 
