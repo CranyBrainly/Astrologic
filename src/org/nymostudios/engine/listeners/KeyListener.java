@@ -1,4 +1,4 @@
-package nymostudios.engine.listeners;
+package org.nymostudios.engine.listeners;
 
 import static org.lwjgl.glfw.GLFW.GLFW_PRESS;
 import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;

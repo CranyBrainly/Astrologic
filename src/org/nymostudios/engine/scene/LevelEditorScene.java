@@ -1,4 +1,4 @@
-package nymostudios.engine.scene;
+package org.nymostudios.engine.scene;
 
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.*;
@@ -8,13 +8,13 @@ import java.nio.IntBuffer;
 
 import org.joml.Vector2f;
 import org.lwjgl.BufferUtils;
-
-import nymostudios.engine.Camera;
-import nymostudios.engine.renderer.Shader;
+import org.nymostudios.engine.Camera;
+import org.nymostudios.engine.renderer.Shader;
+import org.nymostudios.util.Time;
 
 public class LevelEditorScene extends Scene {
 
-    private float[] vertexArray ={
+    private float[] vertexArray = {
         // Position             // Colour [R, G, B, A]
         100.5f,   0.5f, 0.0f,     1.0f, 0.0f, 0.0f, 1.0f, // Bottom right
           0.5f, 100.5f, 0.0f,     0.0f, 1.0f, 0.0f, 1.0f, // Top Left
@@ -79,12 +79,13 @@ public class LevelEditorScene extends Scene {
 
     @Override
     public void update(float dt) {
-
-        camera.position.x -= dt * 50.0f;
+        camera.position.x -= dt * 50f;
+        camera.position.y -= dt * 20f;
 
         defaultShader.use();
         defaultShader.uploadMat4f("uProjection", camera.getProjectionMatrix());
         defaultShader.uploadMat4f("uView", camera.getViewMatrix());
+        defaultShader.uploadFloat("uTime", Time.getTime());
         // Bind the VAO //
         glBindVertexArray(vaoID);
 

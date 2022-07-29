@@ -1,6 +1,6 @@
-package nymostudios.engine.scene;
+package org.nymostudios.engine.scene;
 
-import nymostudios.engine.Camera;
+import org.nymostudios.engine.Camera;
 
 public abstract class Scene {
     protected Camera camera;

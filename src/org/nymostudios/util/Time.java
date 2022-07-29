@@ -1,4 +1,4 @@
-package nymostudios.util;
+package org.nymostudios.util;
 
 public class Time {
     public static float timeStarted = System.nanoTime();

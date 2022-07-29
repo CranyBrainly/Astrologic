@@ -1,4 +1,4 @@
-package nymostudios.engine;
+package org.nymostudios.engine;
 
 import org.joml.Matrix4f;
 import org.joml.Vector2f;

@@ -1,6 +1,6 @@
-package nymostudios;
+package org.nymostudios;
 
-import nymostudios.engine.Window;
+import org.nymostudios.engine.Window;
 
 public class Main {
     public static void main(String[] args) throws Exception {
