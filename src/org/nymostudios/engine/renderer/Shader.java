@@ -11,6 +11,7 @@ import org.joml.Vector3f;
 import org.joml.Vector4f;
 import org.lwjgl.BufferUtils;
 import org.nymostudios.engine.renderer.Shader;
+import org.nymostudios.engine.Window;
 
 import static org.lwjgl.opengl.GL20.*;
 
@@ -26,7 +27,7 @@ public class Shader {
     public Shader(String filepath) {
         this.filePath = filepath;
         try {
-            String source = new String(Files.readAllBytes(Paths.get("src/org/nymostudios/" + filepath)));
+            String source = new String(Files.readAllBytes(Paths.get(Window.get().wokingDir + filepath)));
             String[] splitString = source.split("(#type)( )+([a-zA-Z]+)");
 
             // Find the first pattern after #type  <pattern> //
@@ -171,5 +172,11 @@ public class Shader {
         int varLocation = glGetUniformLocation(shaderProgramID, varName);
         use();
         glUniform1i(varLocation, val);
+    }
+
+    public void uploadTexture(String varName, int slot) {
+        int varLocation = glGetUniformLocation(shaderProgramID, varName);
+        use();
+        glUniform1i(varLocation, slot);
     }
 }

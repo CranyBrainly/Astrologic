@@ -10,16 +10,17 @@ import org.joml.Vector2f;
 import org.lwjgl.BufferUtils;
 import org.nymostudios.engine.Camera;
 import org.nymostudios.engine.renderer.Shader;
+import org.nymostudios.engine.renderer.Texture;
 import org.nymostudios.util.Time;
 
 public class LevelEditorScene extends Scene {
 
     private float[] vertexArray = {
-        // Position             // Colour [R, G, B, A]
-        100.5f,   0.5f, 0.0f,     1.0f, 0.0f, 0.0f, 1.0f, // Bottom right
-          0.5f, 100.5f, 0.0f,     0.0f, 1.0f, 0.0f, 1.0f, // Top Left
-        100.5f, 100.5f, 0.0f,     0.0f, 0.0f, 1.0f, 1.0f, // Top Right
-          0.5f,   0.5f, 0.0f,     1.0f, 1.0f, 0.0f, 1.0f, // Bottom Left
+        // Position             // Colour [R, G, B, A]    // UV Coordinates
+        100.5f,   0.5f, 0.0f,   1.0f, 0.0f, 0.0f, 1.0f,   1, 1, // Bottom right
+          0.5f, 100.5f, 0.0f,   0.0f, 1.0f, 0.0f, 1.0f,   0, 0, // Top Left
+        100.5f, 100.5f, 0.0f,   0.0f, 0.0f, 1.0f, 1.0f,   1, 0, // Top Right
+          0.5f,   0.5f, 0.0f,   1.0f, 1.0f, 0.0f, 1.0f,   0, 1, // Bottom Left
     };
 
     // Counter clockwise order //
@@ -28,7 +29,8 @@ public class LevelEditorScene extends Scene {
         0, 1, 3, // Bottom left trangle //
     };
 
-    Shader defaultShader;
+    private Shader defaultShader;
+    private Texture testTexture;
 
     private int vaoID, vboID, eboID;
 
@@ -39,8 +41,10 @@ public class LevelEditorScene extends Scene {
     public void init() {
         this.camera = new Camera(new Vector2f());
 
-        defaultShader = new Shader("engine/assets/shaders/default.glsl");
+        defaultShader = new Shader("engine/shaders/default.glsl");
         defaultShader.compile();
+
+        this.testTexture = new Texture("sword.png");
         
           /////////////////////////////////////////////////////////////////////
          //// Generate VAO, VBO, and EBO buffers and send them to the GPU ////
@@ -68,21 +72,30 @@ public class LevelEditorScene extends Scene {
         // Add the vertex attribute pointers //
         int positionsSize = 3;
         int colorSize = 4;
-        int floatSizeBytes = 4;
-        int vertexSizeBytes = (positionsSize + colorSize) * floatSizeBytes;
+        int uvSize = 2;
+        int vertexSizeBytes = (positionsSize + colorSize + uvSize) * Float.BYTES;
         glVertexAttribPointer(0, positionsSize, GL_FLOAT, false, vertexSizeBytes, 0);
         glEnableVertexAttribArray(0);
 
-        glVertexAttribPointer(1, colorSize, GL_FLOAT, false, vertexSizeBytes, positionsSize * floatSizeBytes);
+        glVertexAttribPointer(1, colorSize, GL_FLOAT, false, vertexSizeBytes, positionsSize * Float.BYTES);
         glEnableVertexAttribArray(1);
+
+        glVertexAttribPointer(2, uvSize, GL_FLOAT, false, vertexSizeBytes, (positionsSize + colorSize) * Float.BYTES);
+        glEnableVertexAttribArray(2);
     }
 
     @Override
     public void update(float dt) {
-        camera.position.x -= dt * 50f;
-        camera.position.y -= dt * 20f;
+        // camera.position.x -= dt * 50f;
+        // camera.position.y -= dt * 20f;
 
         defaultShader.use();
+
+        // Upload texture to Shader //
+        defaultShader.uploadTexture("TEXTURE_SAMPLER", 0);
+        glActiveTexture(GL_TEXTURE0);
+        testTexture.bind();
+
         defaultShader.uploadMat4f("uProjection", camera.getProjectionMatrix());
         defaultShader.uploadMat4f("uView", camera.getViewMatrix());
         defaultShader.uploadFloat("uTime", Time.getTime());

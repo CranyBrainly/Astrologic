@@ -23,6 +23,8 @@ public class Window {
     private String title;
     private long glfwWindow;
 
+    public String wokingDir = "src/org/nymostudios/";
+
     private static Window window = null;
 
     private static Scene currentScene;
