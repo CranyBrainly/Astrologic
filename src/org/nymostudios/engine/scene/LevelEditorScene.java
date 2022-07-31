@@ -8,7 +8,10 @@ import java.nio.IntBuffer;
 
 import org.joml.Vector2f;
 import org.lwjgl.BufferUtils;
+import org.nymostudios.components.FontRenderer;
+import org.nymostudios.components.SpriteRenderer;
 import org.nymostudios.engine.Camera;
+import org.nymostudios.engine.entity.GameObject;
 import org.nymostudios.engine.renderer.Shader;
 import org.nymostudios.engine.renderer.Texture;
 import org.nymostudios.util.Time;
@@ -32,6 +35,10 @@ public class LevelEditorScene extends Scene {
     private Shader defaultShader;
     private Texture testTexture;
 
+    GameObject testObj;
+
+    private boolean firstTime = false;
+
     private int vaoID, vboID, eboID;
 
     public LevelEditorScene() {
@@ -39,6 +46,12 @@ public class LevelEditorScene extends Scene {
 
     @Override
     public void init() {
+        System.out.println("Test object in creation");
+        this.testObj = new GameObject("test object");
+        this.testObj.addComponent(new SpriteRenderer());
+        this.testObj.addComponent(new FontRenderer());
+        this.addGameObjectToScene(this.testObj);
+
         this.camera = new Camera(new Vector2f());
 
         defaultShader = new Shader("engine/shaders/default.glsl");
@@ -115,6 +128,18 @@ public class LevelEditorScene extends Scene {
         glBindVertexArray(0);
 
         defaultShader.detach();
+
+        if (!firstTime) {
+            System.out.println("Created game objects");
+            GameObject go2 = new GameObject("obj number 2");
+            go2.addComponent(new SpriteRenderer());
+            this.addGameObjectToScene(go2);
+            firstTime = true;
+        }
+
+        for (GameObject go : this.gameObjects) {
+            go.update(dt);
+        }
     }
     
 }
