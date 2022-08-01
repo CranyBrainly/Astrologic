@@ -13,7 +13,7 @@ public class Texture {
     private int texureID;
 
     public Texture (String filepath) {
-        this.filepath = Window.get().wokingDir + filepath;
+        this.filepath = Window.get().workingDir + filepath;
 
         // Generate texture on GPU //
         texureID = glGenTextures();
