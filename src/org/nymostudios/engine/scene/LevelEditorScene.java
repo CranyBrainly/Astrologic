@@ -6,6 +6,7 @@ import org.nymostudios.components.SpriteRenderer;
 import org.nymostudios.engine.entity.GameObject;
 import org.nymostudios.engine.renderer.Camera;
 import org.nymostudios.engine.renderer.Transform;
+import org.nymostudios.util.AssetPool;
 
 public class LevelEditorScene extends Scene {
 
@@ -35,11 +36,17 @@ public class LevelEditorScene extends Scene {
                 this.addGameObjectToScene(go);
             }
         }
+
+        loadResources();
+    }
+
+    private void loadResources() {
+        AssetPool.getShader("/shaders/default.glsl");
     }
 
     @Override
     public void update(float dt) {
-        System.out.println("FPS: " + (1f / dt));
+        // System.out.println("FPS: " + (1f / dt));
 
         for (GameObject go : this.gameObjects) {
             go.update(dt);

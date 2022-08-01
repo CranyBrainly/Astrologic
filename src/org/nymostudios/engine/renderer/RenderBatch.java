@@ -2,6 +2,7 @@ package org.nymostudios.engine.renderer;
 
 import org.nymostudios.components.SpriteRenderer;
 import org.nymostudios.engine.Window;
+import org.nymostudios.util.AssetPool;
 
 import static org.lwjgl.opengl.GL30.*;
 
@@ -31,8 +32,8 @@ public class RenderBatch {
     private Shader shader;
 
     public RenderBatch(int maxBatchSize) {
-        shader = new Shader("engine/shaders/default.glsl");
-        shader.compile();
+
+        shader = AssetPool.getShader("/shaders/default.glsl");
         this.sprites = new SpriteRenderer[maxBatchSize];
         this.maxBatchSize = maxBatchSize;
 

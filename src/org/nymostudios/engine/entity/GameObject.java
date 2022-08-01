@@ -6,7 +6,7 @@ import org.nymostudios.engine.renderer.Transform;
 
 public class GameObject {
     
-    private String name;
+    public String name;
     private List<Component> components;
     public Transform transform;
 

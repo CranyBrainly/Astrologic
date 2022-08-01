@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.FloatBuffer;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
@@ -34,7 +32,7 @@ public class Shader {
 
             try {
                 // input stream
-                InputStream i = Shader.class.getResourceAsStream(Window.get().workingClassDir + filepath);
+                InputStream i = Shader.class.getResourceAsStream(filepath);
                 if (i == null) {
                     throw new Exception("Error: Could not create InputStream for file '" + this.filePath + "'.");
                 }
