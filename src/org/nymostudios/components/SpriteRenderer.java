@@ -1,22 +1,27 @@
 package org.nymostudios.components;
 
+import org.joml.Vector4f;
 import org.nymostudios.engine.entity.Component;
 
 public class SpriteRenderer extends Component {
 
-    private boolean firstTime = false; 
+    Vector4f color;
+
+    public SpriteRenderer(Vector4f color) {
+        this.color = color;
+    }
 
     @Override
     public void start() {
-        System.out.println("Starting...");
+        
     }
 
     @Override
     public void update(float dt) {
-        if (!firstTime) {
-            System.out.println("Updating...");
-            firstTime = true;
-        }
+
     }
-    
+
+    public Vector4f getColor() {
+        return this.color;
+    }
 }

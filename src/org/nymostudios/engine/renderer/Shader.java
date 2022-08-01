@@ -34,7 +34,7 @@ public class Shader {
 
             try {
                 // input stream
-                InputStream i = Shader.class.getResourceAsStream("/org/nymostudios/" + filepath);
+                InputStream i = Shader.class.getResourceAsStream(Window.get().workingClassDir + filepath);
                 if (i == null) {
                     throw new Exception("Error: Could not create InputStream for file '" + this.filePath + "'.");
                 }
@@ -51,7 +51,7 @@ public class Shader {
                 } 
                 i.close();
 
-            } catch(Exception e) {
+            } catch (Exception e) {
                 System.out.println(e);
             }
 
@@ -61,11 +61,8 @@ public class Shader {
 
             // Find the first pattern after #type  <pattern> //
             int index = source.indexOf("#type") + 6;
-            System.out.println(index);
             int eol = source.indexOf("\n", index);
-            System.out.println(eol);
             String firstPattern = source.substring(index, eol).trim();
-            System.out.println(firstPattern);
 
             index = source.indexOf("#type", eol) + 6;
             eol = source.indexOf("\n", index);

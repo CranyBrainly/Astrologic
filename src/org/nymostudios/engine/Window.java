@@ -23,7 +23,8 @@ public class Window {
     private String title;
     private long glfwWindow;
 
-    public String workingDir = "src/org/nymostudios/";
+    public String   workingDir  = "src/org/nymostudios/";
+    public String workingClassDir = "/org/nymostudios/";
 
     private static Window window = null;
 
@@ -47,6 +48,10 @@ public class Window {
         }
 
         return Window.window;
+    }
+
+    public static Scene getScene() {
+        return currentScene;
     }
 
     public static void changeScene(int newScene) {
