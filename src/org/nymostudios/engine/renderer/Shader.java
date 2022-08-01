@@ -1,6 +1,9 @@
 package org.nymostudios.engine.renderer;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.FloatBuffer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -27,16 +30,45 @@ public class Shader {
     public Shader(String filepath) {
         this.filePath = filepath;
         try {
-            String source = new String(Files.readAllBytes(Paths.get(Window.get().wokingDir + filepath)));
+            String preSource = "";
+
+            try {
+                // input stream
+                InputStream i = Shader.class.getResourceAsStream("/org/nymostudios/" + filepath);
+                if (i == null) {
+                    throw new Exception("Error: Could not create InputStream for file '" + this.filePath + "'.");
+                }
+                BufferedReader r = new BufferedReader(new InputStreamReader(i));
+
+                // reads each line
+                String l;
+                while((l = r.readLine()) != null) {
+                    if (preSource == "") {
+                        preSource = preSource + l;
+                    } else {
+                        preSource = preSource + "\n" + l;
+                    }
+                } 
+                i.close();
+
+            } catch(Exception e) {
+                System.out.println(e);
+            }
+
+            String source = new String(preSource);
+
             String[] splitString = source.split("(#type)( )+([a-zA-Z]+)");
 
             // Find the first pattern after #type  <pattern> //
             int index = source.indexOf("#type") + 6;
-            int eol = source.indexOf("\r\n", index);
+            System.out.println(index);
+            int eol = source.indexOf("\n", index);
+            System.out.println(eol);
             String firstPattern = source.substring(index, eol).trim();
+            System.out.println(firstPattern);
 
             index = source.indexOf("#type", eol) + 6;
-            eol = source.indexOf("\r\n", index);
+            eol = source.indexOf("\n", index);
             String secondPattern = source.substring(index, eol).trim();
 
             if (firstPattern.equals("vertex")) {
